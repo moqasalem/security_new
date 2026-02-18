@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('password');
             $table->string('identity_number');
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardBranchController;
 use App\Http\Controllers\Dashboard\DashboardUserController;
+use App\Http\Controllers\Dashboard\DashboardEmployeeController;
 
 Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
 
@@ -76,6 +77,16 @@ Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
     Route::get('/contracts/{id}', function ($id) {
         return view('contracts.show');
     })->name('contracts.show');
+
+    // Employees
+    Route::get('/employees', [DashboardEmployeeController::class, 'index'])->name('employees');
+    Route::post('/employees', [DashboardEmployeeController::class, 'store'])->name('employees.store');
+    Route::put('/employees/{id}', [DashboardEmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{id}', [DashboardEmployeeController::class, 'destroy'])->name('employees.destroy');
+    Route::patch('/employees/{id}/toggle-status', [
+        DashboardEmployeeController::class,
+        'toggleStatus'
+    ])->name('employees.toggle-status');
 
     // Employee Contracts
     Route::get('/employee-contracts', function () {
