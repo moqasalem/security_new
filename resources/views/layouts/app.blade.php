@@ -78,6 +78,9 @@
 
         details[open] .dropdown-menu {
             display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         /* --- Tabs via radio buttons --- */
