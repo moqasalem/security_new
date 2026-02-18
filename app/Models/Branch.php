@@ -13,7 +13,8 @@ class Branch extends Model
         'address',
         'city_id',
         'manager_id',
-        'is_active'
+        'is_active',
+        'main_branch_id',
     ];
 
     protected $casts = [
@@ -33,5 +34,10 @@ class Branch extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function main_branch()
+    {
+        return $this->belongsTo(Branch::class, 'main_branch_id');
     }
 }

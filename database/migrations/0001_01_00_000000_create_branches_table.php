@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('main_branch_id')->nullable()->constrained('branches')->onDelete('set null'); 
             $table->string('address')->nullable();
             $table->foreignId('city_id')->nullable()->constrained('cities')->onDelete('set null');
             $table->unsignedBigInteger('manager_id')->nullable();

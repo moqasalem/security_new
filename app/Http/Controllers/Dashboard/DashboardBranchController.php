@@ -8,24 +8,51 @@ use App\Models\City;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class DashboardBranchController extends Controller
 {
     /**
      * Display a listing of branches.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $branches = Branch::with(['city', 'manager'])
-            ->withCount('users')
-            ->orderBy('id')
-            ->get();
+        $query = Branch::with(['city', 'manager', 'main_branch'])
+            ->withCount('users');
+
+        // Search by name or city name
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhereHas('city', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        // Filter by status
+        if ($request->filled('status') && $request->input('status') !== 'all') {
+            $isActive = $request->input('status') === 'active';
+            $query->where('is_active', $isActive);
+        }
+
+        // Filter by city
+        if ($request->filled('city_id') && $request->input('city_id') !== 'all') {
+            $query->where('city_id', $request->input('city_id'));
+        }
+
+        // Filter by main branch (show sub-branches)
+        if ($request->filled('main_branch_id') && $request->input('main_branch_id') !== 'all') {
+            $query->where('main_branch_id', $request->input('main_branch_id'));
+        }
+
+        $branches = $query->orderBy('id')->get();
 
         $cities = City::orderBy('name')->get();
         $managers = User::orderBy('name')->get();
-        //Log::info($cities);
-        return view('branches.index', compact('branches', 'cities', 'managers'));
+        $mainBranches = Branch::orderBy('name')->get();
+
+        return view('branches.index', compact('branches', 'cities', 'managers', 'mainBranches'));
     }
 
     /**
@@ -54,6 +81,7 @@ class DashboardBranchController extends Controller
             'city_id' => ['required', 'exists:cities,id'],
             'address' => ['nullable', 'string', 'max:500'],
             'manager_id' => ['nullable', 'exists:users,id'],
+            'main_branch_id' => ['nullable', 'exists:branches,id'],
             'is_active' => ['nullable'],
         ], [
             'name.required' => 'اسم الفرع مطلوب',
@@ -81,6 +109,7 @@ class DashboardBranchController extends Controller
             'city_id' => ['required', 'exists:cities,id'],
             'address' => ['nullable', 'string', 'max:500'],
             'manager_id' => ['nullable', 'exists:users,id'],
+            'main_branch_id' => ['nullable', 'exists:branches,id'],
             'is_active' => ['nullable'],
         ], [
             'name.required' => 'اسم الفرع مطلوب',
