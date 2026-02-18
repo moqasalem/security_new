@@ -50,18 +50,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the branch name for this user.
+     * Get the branch that this user belongs to.
      */
-    public function getBranchNameAttribute(): string
+    public function branch()
     {
-        $branches = [
-            1 => 'الرياض',
-            2 => 'جدة',
-            3 => 'الدمام',
-            4 => 'مكة',
-            5 => 'المدينة',
-        ];
-
-        return $branches[$this->branch_id] ?? 'غير محدد';
+        return $this->belongsTo(\App\Models\Branch::class);
     }
 }

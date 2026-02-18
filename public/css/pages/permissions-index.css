@@ -1,0 +1,320 @@
+/* ==========================================================================
+   Permissions & Roles - Index Page
+   ========================================================================== */
+
+/* Page Header */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.breadcrumb a {
+    color: #64748b;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #2563eb;
+}
+
+/* Dropdown (for topbar) */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+    font-family: inherit;
+    background: none;
+    border: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 200;
+}
+
+.dropdown-menu--left {
+    left: auto;
+    right: 0;
+}
+
+details.dropdown > summary {
+    list-style: none;
+}
+
+details.dropdown > summary::-webkit-details-marker {
+    display: none;
+}
+
+details.dropdown > summary::marker {
+    display: none;
+}
+
+details.dropdown[open] > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: #475569;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    font-family: inherit;
+}
+
+.dropdown-item:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #e2e8f0;
+    margin: 6px 0;
+}
+
+/* Tabs via radio buttons (CSS-only) */
+.tab-radio {
+    display: none;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 0;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.tab-btn:hover {
+    background: #f8fafc;
+}
+
+.tab-count {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+/* Tab panels hidden by default */
+.tab-panel {
+    display: none;
+}
+
+/* Roles tab active */
+#tabRoles:checked ~ .tabs-nav label[for="tabRoles"] {
+    background: #2563eb;
+    color: #fff;
+}
+
+#tabRoles:checked ~ .tabs-nav label[for="tabRoles"] .tab-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+#tabRoles:checked ~ .tab-panel--roles {
+    display: block;
+}
+
+/* Permissions tab active */
+#tabPermissions:checked ~ .tabs-nav label[for="tabPermissions"] {
+    background: #2563eb;
+    color: #fff;
+}
+
+#tabPermissions:checked ~ .tabs-nav label[for="tabPermissions"] .tab-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+#tabPermissions:checked ~ .tab-panel--permissions {
+    display: block;
+}
+
+/* Table */
+.table-card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    overflow: visible !important;
+}
+
+.table-wrapper {
+    min-width: 0;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: #f8fafc;
+}
+
+.data-table th {
+    padding: 14px 16px;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 16px;
+    font-size: 14px;
+    color: #0f172a;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.data-table tbody tr {
+    transition: background 0.2s;
+}
+
+.data-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.data-table tbody tr:nth-child(even):hover {
+    background: #f5f7fa;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge--success {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status-badge--info {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+/* Code key */
+.code-key {
+    background: #f1f5f9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: "Courier New", monospace;
+    color: #2563eb;
+}
+
+/* Chip */
+.chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.chip--group {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.text-muted {
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tabs-nav {
+        overflow-x: auto;
+    }
+
+    .tab-btn {
+        min-width: 110px;
+        flex: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

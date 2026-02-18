@@ -148,6 +148,7 @@
     font-family: inherit;
     font-size: 14px;
     transition: all 0.2s;
+    padding-right: 40px;
 }
 
 .toolbar__input:focus {

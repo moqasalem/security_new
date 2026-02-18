@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\Dashboard\DashboardBranchController;
+use App\Http\Controllers\Dashboard\DashboardUserController;
 
 Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
 
@@ -16,8 +17,14 @@ Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
     Route::get('/branches/{id}', [DashboardBranchController::class, 'show'])->name('branches.show');
     Route::post('/branches', [DashboardBranchController::class, 'store'])->name('branches.store');
     Route::put('/branches/{id}', [DashboardBranchController::class, 'update'])->name('branches.update');
-    Route::patch('/branches/{id}/toggle-status', [DashboardBranchController::class, 'toggleStatus'])->name('branches.toggle-status');
-    Route::post('/branches/{id}/assign-users', [DashboardBranchController::class, 'assignUsers'])->name('branches.assign-users');
+    Route::patch('/branches/{id}/toggle-status', [
+        DashboardBranchController::class,
+        'toggleStatus'
+    ])->name('branches.toggle-status');
+    Route::post('/branches/{id}/assign-users', [
+        DashboardBranchController::class,
+        'assignUsers'
+    ])->name('branches.assign-users');
 
 
     // Customers
@@ -94,10 +101,20 @@ Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
         return view('reports.index');
     })->name('reports');
 
-    // Users & Roles
-    Route::get('/users', function () {
-        return view('users.index');
-    })->name('users');
+    // Users
+    Route::get('/users', [DashboardUserController::class, 'index'])->name('users');
+    Route::post('/users', [DashboardUserController::class, 'store'])->name('users.store');
+    Route::put('/users/{id}', [DashboardUserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [DashboardUserController::class, 'destroy'])->name('users.destroy');
+    Route::patch('/users/{id}/toggle-status', [
+        DashboardUserController::class,
+        'toggleStatus'
+    ])->name('users.toggle-status');
+
+    // Permissions & Roles (standalone page, no backend)
+    Route::get('/permissions', function () {
+        return view('permissions.index');
+    })->name('permissions');
 
     // Settings
     Route::get('/settings', function () {
@@ -115,4 +132,3 @@ Route::prefix('dashboard')->middleware('userMiddleware')->group(function () {
     Route::put('/profile/password', [DashboardProfileController::class, 'changePassword'])->name('profile.password');
 
 });
-
