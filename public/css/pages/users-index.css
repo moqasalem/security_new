@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Users & Roles - Index Page
+   Page-specific styles only (shared components in components.css)
+   ========================================================================== */
+
+/* User cell */
+.user-cell{display:flex;align-items:center;gap:10px}
+.user-cell .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+
+/* Link */
+.link-role{color:var(--c-primary,#2563eb);text-decoration:none;font-weight:600}
+.link-role:hover{text-decoration:underline}
+
+/* Tabs */
+.tabs-nav{display:flex;gap:0;background:var(--c-bg-white,#fff);border-radius:var(--r-2xl,14px);box-shadow:var(--s-sm);padding:6px;margin-bottom:16px}
+.tab-btn{flex:1;padding:12px 16px;border:none;background:transparent;border-radius:var(--r-lg,10px);font-family:var(--font,'Cairo',sans-serif);font-size:14px;font-weight:600;color:var(--c-text-muted,#64748b);cursor:pointer;transition:all var(--t-base,.2s);display:flex;align-items:center;justify-content:center;gap:8px}
+.tab-btn:hover{background:var(--c-bg-hover,#f8fafc)}
+.tab-btn.active{background:var(--c-primary,#2563eb);color:#fff}
+.tab-btn:focus-visible{outline:2px solid var(--c-primary,#2563eb);outline-offset:2px}
+.tab-count{font-size:11px;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.2);font-weight:700}
+.tab-btn:not(.active) .tab-count{background:var(--c-bg-alt,#f1f5f9);color:var(--c-text-faint,#94a3b8)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Multi-select & Radio */
+.multi-select{border:2px solid var(--c-border,#e2e8f0);border-radius:8px;padding:10px;max-height:180px;overflow-y:auto}
+.multi-option{display:flex;align-items:center;gap:8px;padding:6px 8px;font-size:13px;color:var(--c-text,#0f172a);cursor:pointer;border-radius:6px;transition:background .15s}
+.multi-option:hover{background:var(--c-bg-hover,#f8fafc)}
+.multi-option input{accent-color:var(--c-primary,#2563eb);width:16px;height:16px}
+.radio-group{display:flex;flex-direction:column;gap:10px}
+.radio-option{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--c-text,#0f172a);cursor:pointer}
+.radio-option input{accent-color:var(--c-primary,#2563eb);width:16px;height:16px}
+
+/* Permissions grid */
+.perms-grid{border:2px solid var(--c-border,#e2e8f0);border-radius:8px;padding:12px;max-height:300px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.perm-group{padding:10px;background:var(--c-bg-hover,#f8fafc);border-radius:8px}
+.perm-group__title{font-size:13px;font-weight:700;color:var(--c-primary,#2563eb);margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid var(--c-border,#e2e8f0)}
+
+/* Skeleton */
+.data-table tr.skeleton td{background:var(--c-bg-alt,#f1f5f9);animation:pulse 1s infinite}
+
+/* Print */
+@media print{.app-sidebar,.app-topbar,.page-header__right,.filter-card,.bulk-bar,.table-pagination,.tabs-nav,.toast,.modal,.drawer,.actions-wrap{display:none!important}.users-page{padding:0}.table-card{box-shadow:none;border:1px solid var(--c-border,#e2e8f0)}}
+
+/* Responsive */
+@media(max-width:768px){.perms-grid{grid-template-columns:1fr}.tabs-nav{overflow-x:auto}.tab-btn{min-width:110px;flex:none}}

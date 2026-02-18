@@ -1,0 +1,558 @@
+/* ==========================================================================
+   Quotation Print Template - A4 Print-Ready Styles
+   ========================================================================== */
+
+/* Import Cairo Font */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+/* Page Header (Hidden on print) */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    font-family: 'Cairo', sans-serif;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
+    font-family: 'Cairo', sans-serif;
+}
+
+.breadcrumb a {
+    color: #64748b;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #2563eb;
+}
+
+.page-header__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    text-decoration: none;
+}
+
+.btn--primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn--primary:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.btn--outline {
+    background: white;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.btn--outline:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.btn--sm {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+/* Print Container */
+.print-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+    background: #f5f7fb;
+    min-height: calc(100vh - 150px);
+}
+
+/* Print Sheet (A4 Dimensions) */
+.print-sheet {
+    width: 794px;
+    min-height: 1123px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 50px;
+    font-family: 'Cairo', sans-serif;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sheet Header */
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.logo-box {
+    flex-shrink: 0;
+}
+
+.logo-box svg {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.header-info {
+    flex: 1;
+    text-align: left;
+}
+
+.quotation-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #f59e0b;
+    margin: 0 0 12px 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+.info-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 8px;
+}
+
+.info-item {
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.info-label {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.info-value {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* Customer Section */
+.customer-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-right: 4px solid #f59e0b;
+}
+
+.customer-greeting {
+    font-size: 16px;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+}
+
+.customer-intro {
+    font-size: 14px;
+    color: #475569;
+    margin: 0 0 8px 0;
+}
+
+.customer-text {
+    font-size: 14px;
+    color: #475569;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Items Table */
+.items-section {
+    margin-bottom: 30px;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #cbd5e1;
+}
+
+.items-table thead th {
+    background: #f2b705;
+    color: #0f172a;
+    padding: 14px 12px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid #cbd5e1;
+}
+
+.items-table tbody td {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    color: #475569;
+    text-align: right;
+}
+
+.items-table tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.items-table tfoot td {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+    text-align: right;
+}
+
+.subtotal-row td {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+
+.tax-row td {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+}
+
+.total-row td {
+    background: #0f2a44;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Approval Section */
+.approval-section {
+    margin-bottom: 25px;
+    padding: 14px 20px;
+    background: #fff7ed;
+    border-radius: 8px;
+    border-right: 3px solid #f59e0b;
+}
+
+.approved-by {
+    color: #f59e0b;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.approved-by strong {
+    color: #0f172a;
+}
+
+/* Terms Section */
+.terms-section {
+    margin-bottom: 30px;
+}
+
+.terms-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 12px 0;
+}
+
+.terms-list {
+    margin: 0;
+    padding: 0;
+    padding-right: 20px;
+    list-style: none;
+}
+
+.terms-list li {
+    position: relative;
+    padding: 6px 0 6px 0;
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.terms-list li:before {
+    content: '●';
+    position: absolute;
+    right: -20px;
+    color: #f59e0b;
+    font-size: 10px;
+}
+
+/* Signature Section */
+.signature-section {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.signature-box {
+    text-align: center;
+}
+
+.signature-line {
+    font-size: 14px;
+    color: #0f172a;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.signature-name {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Sheet Footer */
+.sheet-footer {
+    margin-top: auto;
+    margin-right: -50px;
+    margin-left: -50px;
+    margin-bottom: -40px;
+}
+
+.footer-decoration {
+    position: relative;
+    height: 120px;
+}
+
+.footer-shape {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.contact-info {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 12px;
+}
+
+.contact-item svg {
+    flex-shrink: 0;
+    color: #f2b705;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 80px;
+    left: 24px;
+    background: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.toast.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.toast__icon {
+    flex-shrink: 0;
+    color: #2563eb;
+}
+
+.toast__message {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f172a;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 850px) {
+    .print-container {
+        padding: 20px 10px;
+    }
+
+    .print-sheet {
+        width: 100%;
+        min-height: auto;
+        padding: 30px 20px;
+    }
+
+    .sheet-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-info {
+        text-align: center;
+    }
+
+    .quotation-title {
+        font-size: 32px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .items-table {
+        font-size: 12px;
+    }
+
+    .items-table thead th {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+
+    .items-table tbody td,
+    .items-table tfoot td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .contact-info {
+        left: 20px;
+        font-size: 10px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    /* Hide non-print elements */
+    .no-print,
+    .page-header,
+    .app-sidebar,
+    .app-topbar,
+    .toast {
+        display: none !important;
+    }
+
+    /* Reset body and html */
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    /* Print Container */
+    .print-container {
+        padding: 0;
+        background: white;
+        margin: 0;
+        min-height: auto;
+    }
+
+    /* Print Sheet */
+    .print-sheet {
+        width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        padding: 20mm 15mm;
+        margin: 0;
+        page-break-after: always;
+    }
+
+    /* Ensure proper page breaks */
+    .items-section,
+    .terms-section {
+        page-break-inside: avoid;
+    }
+
+    /* Footer stays at bottom */
+    .sheet-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+    }
+
+    /* Adjust text for print clarity */
+    .quotation-title {
+        font-size: 36px;
+    }
+
+    .items-table {
+        border: 1px solid #000;
+    }
+
+    .items-table th,
+    .items-table td {
+        border: 1px solid #000;
+    }
+
+    /* Color adjustments for print */
+    .items-table thead th {
+        background: #f2b705 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .total-row td {
+        background: #0f2a44 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .footer-shape rect,
+    .footer-shape polygon,
+    .footer-shape circle {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Set page size and margins */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}
