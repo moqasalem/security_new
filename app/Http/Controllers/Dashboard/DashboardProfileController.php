@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,14 +17,7 @@ class DashboardProfileController extends Controller
     public function show()
     {
         $user = Auth::user();
-
-        $branches = [
-            1 => 'الرياض',
-            2 => 'جدة',
-            3 => 'الدمام',
-            4 => 'مكة',
-            5 => 'المدينة',
-        ];
+        $branches = Branch::pluck('name', 'id');
 
         return view('profile.index', compact('user', 'branches'));
     }
@@ -48,15 +42,7 @@ class DashboardProfileController extends Controller
 
         $user->update($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'تم تحديث الملف الشخصي بنجاح',
-            'user' => [
-                'name' => $user->name,
-                'email' => $user->email,
-                'mobile' => $user->mobile,
-            ],
-        ]);
+        return redirect()->route('profile')->with('success', 'تم تحديث الملف الشخصي بنجاح');
     }
 
     /**
@@ -77,19 +63,13 @@ class DashboardProfileController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'كلمة المرور الحالية غير صحيحة',
-            ], 422);
+            return redirect()->route('profile')->withErrors(['current_password' => 'كلمة المرور الحالية غير صحيحة']);
         }
 
         $user->update([
             'password' => $request->new_password,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'تم تغيير كلمة المرور بنجاح',
-        ]);
+        return redirect()->route('profile')->with('success', 'تم تغيير كلمة المرور بنجاح');
     }
 }
