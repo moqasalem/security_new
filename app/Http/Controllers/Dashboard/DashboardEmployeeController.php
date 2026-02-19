@@ -38,7 +38,7 @@ class DashboardEmployeeController extends Controller
             $query->where('branch_id', $request->input('branch_id'));
         }
 
-        $employees = $query->orderBy('id')->get();
+        $employees = $query->orderBy('id')->paginate(30)->appends($request->query());
         $branches = Branch::where('is_active', true)->orderBy('name')->get();
 
         return view('employees.index', compact('employees', 'branches'));

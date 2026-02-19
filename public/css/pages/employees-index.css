@@ -260,10 +260,102 @@
     font-size: 14px;
     color: #64748b;
     padding: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .results-info strong {
     color: #0f172a;
+}
+
+.results-info__range {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* Pagination */
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    direction: ltr;
+}
+
+.pagination__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.pagination__btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.pagination__btn--disabled {
+    color: #cbd5e1;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pagination__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pagination__num:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.pagination__num--active {
+    background: #2563eb;
+    color: white;
+    pointer-events: none;
+}
+
+.pagination__num--active:hover {
+    background: #1d4ed8;
+    color: white;
+}
+
+.pagination__dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    font-size: 14px;
+    color: #94a3b8;
+    pointer-events: none;
 }
 
 /* Dropdown */
@@ -647,6 +739,22 @@ details.dropdown[open] > .dropdown-menu {
     }
 
     .filter-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination {
+        gap: 2px;
+    }
+
+    .pagination__num,
+    .pagination__btn {
+        min-width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+
+    .results-info {
         flex-direction: column;
         align-items: flex-start;
     }

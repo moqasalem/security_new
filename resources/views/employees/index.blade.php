@@ -195,11 +195,15 @@
     </form>
 
     <!-- Results Count -->
-    @if (request('search') || request('status') || request('branch_id'))
-        <div class="results-info">
-            <span>عدد النتائج: <strong>{{ $employees->count() }}</strong></span>
-        </div>
-    @endif
+    <div class="results-info">
+        @if (request('search') || request('status') || request('branch_id'))
+            <span>عدد النتائج: <strong>{{ $employees->total() }}</strong></span>
+        @else
+            <span>إجمالي الموظفين: <strong>{{ $employees->total() }}</strong></span>
+        @endif
+        <span class="results-info__range">عرض {{ $employees->firstItem() ?? 0 }} - {{ $employees->lastItem() ?? 0 }} من
+            {{ $employees->total() }}</span>
+    </div>
 
     <!-- Employees Table -->
     <div class="table-card">
@@ -309,6 +313,81 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        @if ($employees->hasPages())
+            <div class="pagination-wrapper">
+                <div class="pagination">
+                    {{-- Previous Page --}}
+                    @if ($employees->onFirstPage())
+                        <span class="pagination__btn pagination__btn--disabled" aria-label="السابق">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    @else
+                        <a href="{{ $employees->previousPageUrl() }}" class="pagination__btn" aria-label="السابق">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    @endif
+
+                    {{-- Page Numbers --}}
+                    @php
+                        $currentPage = $employees->currentPage();
+                        $lastPage = $employees->lastPage();
+                        $start = max(1, $currentPage - 2);
+                        $end = min($lastPage, $currentPage + 2);
+                    @endphp
+
+                    @if ($start > 1)
+                        <a href="{{ $employees->url(1) }}" class="pagination__num">1</a>
+                        @if ($start > 2)
+                            <span class="pagination__dots">…</span>
+                        @endif
+                    @endif
+
+                    @for ($i = $start; $i <= $end; $i++)
+                        @if ($i == $currentPage)
+                            <span class="pagination__num pagination__num--active">{{ $i }}</span>
+                        @else
+                            <a href="{{ $employees->url($i) }}" class="pagination__num">{{ $i }}</a>
+                        @endif
+                    @endfor
+
+                    @if ($end < $lastPage)
+                        @if ($end < $lastPage - 1)
+                            <span class="pagination__dots">…</span>
+                        @endif
+                        <a href="{{ $employees->url($lastPage) }}" class="pagination__num">{{ $lastPage }}</a>
+                    @endif
+
+                    {{-- Next Page --}}
+                    @if ($employees->hasMorePages())
+                        <a href="{{ $employees->nextPageUrl() }}" class="pagination__btn" aria-label="التالي">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    @else
+                        <span class="pagination__btn pagination__btn--disabled" aria-label="التالي">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
 
     <!-- Edit Modals (rendered outside the table for proper layering) -->
